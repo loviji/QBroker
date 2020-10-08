@@ -1,4 +1,5 @@
 ﻿using DMSBrokerService.Models;
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace DMSBrokerService.Operations
         //    q.Enqueue(db.QueueBrokers.Where(s => s.Execution_Status == false).FirstOrDefault());
         //}
 
-     
+        [DisableConcurrentExecution(2)]
         public void ExecuteProcedure(QueueBroker queueBroker)
         {
             db.Database.ExecuteSqlCommand("SP_DMS_UPDATE_DOCUMENT_AUTHORS_FP @p0", parameters: new[] { "12740" });
