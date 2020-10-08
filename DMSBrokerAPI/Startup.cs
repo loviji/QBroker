@@ -26,10 +26,8 @@ namespace DMSBrokerService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string con = "Server = ip; Database = dbname; User Id = username; Password = passdddword;";
-            
-            services.AddDbContext<QueueBrokersContext>(options => options.UseSqlServer(con));
-
+            services.AddDbContext<QueueBrokersContext>(options =>
+      options.UseSqlServer(Configuration.GetConnectionString("QueueBrokersContext")));
             services.AddControllers(); 
         }
 
